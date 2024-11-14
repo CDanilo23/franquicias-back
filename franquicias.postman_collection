@@ -1,0 +1,277 @@
+{
+	"info": {
+		"_postman_id": "ef054df9-1b78-4447-9efa-527ca623e20f",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2543909"
+	},
+	"item": [
+		{
+			"name": "Franquicias",
+			"item": [
+				{
+					"name": "crear franquicia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"MotoParts\",\r\n    \"sucursales\": [\r\n        {\r\n            \"nombre\": \"calle 80\",\r\n            \"productos\": [\r\n                {\r\n                    \"nombre\":\"piston-nmax\",\r\n                    \"stock\": 35\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear sucursal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"suc2\",\r\n    \"nombre\": \"Av San juan\",\r\n    \"productos\": [\r\n        {\r\n            \"_id\": \"prod1\",\r\n            \"nombre\": \"piñon-nmax\",\r\n            \"stock\": 15\r\n        }\r\n    ]\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias/MotoParts/sucursales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias",
+								"MotoParts",
+								"sucursales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregar producto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"prod2\",\r\n    \"nombre\": \"balinera\",\r\n    \"stock\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias/MotoParts/sucursales/calle 80/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias",
+								"MotoParts",
+								"sucursales",
+								"calle 80",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "producto > stock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias/MotoParts/productos-con-mayor-stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias",
+								"MotoParts",
+								"productos-con-mayor-stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrar producto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias/MotoParts/sucursales/calle 80/productos/balinera",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias",
+								"MotoParts",
+								"sucursales",
+								"calle 80",
+								"productos",
+								"balinera"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificar stock",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias/MotoParts/sucursales/calle 80/productos/balinera/stock?nuevoStock=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias",
+								"MotoParts",
+								"sucursales",
+								"calle 80",
+								"productos",
+								"balinera",
+								"stock"
+							],
+							"query": [
+								{
+									"key": "nuevoStock",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificar nombre franquicia",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias/PartsMoto/nombre?nuevoNombre=MotoParts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias",
+								"PartsMoto",
+								"nombre"
+							],
+							"query": [
+								{
+									"key": "nuevoNombre",
+									"value": "MotoParts"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificar nombre sucursal",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias/MotoParts/sucursales/suc1/nombre?nuevoNombre=calle 80",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias",
+								"MotoParts",
+								"sucursales",
+								"suc1",
+								"nombre"
+							],
+							"query": [
+								{
+									"key": "nuevoNombre",
+									"value": "calle 80"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificar nombre producto",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias/MotoParts/sucursales/suc1/productos/balinera-nmax/nombre?nuevoNombre=balinera",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias",
+								"MotoParts",
+								"sucursales",
+								"suc1",
+								"productos",
+								"balinera-nmax",
+								"nombre"
+							],
+							"query": [
+								{
+									"key": "nuevoNombre",
+									"value": "balinera"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
