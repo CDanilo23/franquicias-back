@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Comparator;
+
 @Service
 public class FranquiciaServiceImpl implements FranquiciaService{
 
@@ -24,6 +26,7 @@ public class FranquiciaServiceImpl implements FranquiciaService{
 
     @Override
     public Mono<Franquicia> agregarSucursal(String nombreFranquicia, Sucursal sucursal) {
+
         return franquiciaRepository.findByNombre(nombreFranquicia)
                 .flatMap(franquicia -> {
                     franquicia.getSucursales().add(sucursal);
@@ -73,14 +76,14 @@ public class FranquiciaServiceImpl implements FranquiciaService{
     public Flux<Producto> obtenerProductoConMayorStockPorSucursal(String nombreFranquicia) {
         return franquiciaRepository.findByNombre(nombreFranquicia)
                 .flatMapMany(franquicia -> Flux.fromIterable(franquicia.getSucursales()))
-                .map(sucursal -> sucursal.getProductos().stream().max((p1, p2) -> Integer.compare(p1.getStock(), p2.getStock())).orElse(null))
+                .mapNotNull(sucursal -> sucursal.getProductos().stream().max(Comparator.comparingInt(Producto::getStock)).orElse(null))
                 .filter(producto -> producto != null);
     }
 
 
     @Override
-    public Mono<Franquicia> actualizarNombreFranquicia(String idFranquicia, String nuevoNombre) {
-        return franquiciaRepository.findById(idFranquicia)
+    public Mono<Franquicia> actualizarNombreFranquicia(String nombreFranquicia, String nuevoNombre) {
+        return franquiciaRepository.findByNombre(nombreFranquicia)
                 .flatMap(franquicia -> {
                     franquicia.setNombre(nuevoNombre);
                     return franquiciaRepository.save(franquicia);
@@ -88,8 +91,8 @@ public class FranquiciaServiceImpl implements FranquiciaService{
     }
 
     @Override
-    public Mono<Franquicia> actualizarNombreSucursal(String idFranquicia, String idSucursal, String nuevoNombre) {
-        return franquiciaRepository.findById(idFranquicia)
+    public Mono<Franquicia> actualizarNombreSucursal(String nombreFranquicia, String idSucursal, String nuevoNombre) {
+        return franquiciaRepository.findByNombre(nombreFranquicia)
                 .flatMap(franquicia -> {
                     franquicia.getSucursales().stream()
                             .filter(sucursal -> sucursal.getId().equals(idSucursal))
@@ -100,8 +103,8 @@ public class FranquiciaServiceImpl implements FranquiciaService{
     }
 
     @Override
-    public Mono<Franquicia> actualizarNombreProducto(String idFranquicia, String idSucursal, String nombreProductoActual, String nuevoNombreProducto) {
-        return franquiciaRepository.findById(idFranquicia)
+    public Mono<Franquicia> actualizarNombreProducto(String nombreFranquicia, String idSucursal, String nombreProductoActual, String nuevoNombreProducto) {
+        return franquiciaRepository.findByNombre(nombreFranquicia)
                 .flatMap(franquicia -> {
                     franquicia.getSucursales().stream()
                             .filter(sucursal -> sucursal.getId().equals(idSucursal))

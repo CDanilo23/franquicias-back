@@ -49,19 +49,16 @@ public class FranquiciasController {
         return franquiciaService.obtenerProductoConMayorStockPorSucursal(nombreFranquicia);
     }
 
-    // Endpoint para actualizar el nombre de una franquicia
     @PatchMapping("/{nombreFranquicia}/nombre")
     public Mono<Franquicia> actualizarNombreFranquicia(@PathVariable String nombreFranquicia, @RequestParam String nuevoNombre) {
         return franquiciaService.actualizarNombreFranquicia(nombreFranquicia, nuevoNombre);
     }
 
-    // Endpoint para actualizar el nombre de una sucursal
-    @PatchMapping("/{nombreFranquicia}/sucursales/{nombreSucursal}/nombre")
-    public Mono<Franquicia> actualizarNombreSucursal(@PathVariable String nombreFranquicia, @PathVariable String nombreSucursal, @RequestParam String nuevoNombre) {
-        return franquiciaService.actualizarNombreSucursal(nombreFranquicia, nombreSucursal, nuevoNombre);
+    @PatchMapping("/{nombreFranquicia}/sucursales/{idSucursal}/nombre")
+    public Mono<Franquicia> actualizarNombreSucursal(@PathVariable String nombreFranquicia, @PathVariable String idSucursal, @RequestParam String nuevoNombre) {
+        return franquiciaService.actualizarNombreSucursal(nombreFranquicia, idSucursal, nuevoNombre);
     }
 
-    // Endpoint para actualizar el nombre de un producto
     @PatchMapping("/{nombreFranquicia}/sucursales/{nombreSucursal}/productos/{nombreProducto}/nombre")
     public Mono<Franquicia> actualizarNombreProducto(@PathVariable String nombreFranquicia, @PathVariable String nombreSucursal, @PathVariable String nombreProducto, @RequestParam String nuevoNombre) {
         return franquiciaService.actualizarNombreProducto(nombreFranquicia, nombreSucursal, nombreProducto, nuevoNombre);
