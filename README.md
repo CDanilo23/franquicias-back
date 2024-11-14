@@ -60,6 +60,7 @@ mvn clean package
 ````franquicia````
 
 ![img_1.png](img_1.png)
+
 7. Ejecuta la aplicacion desde el IDE de tu preferecia o con el comando
 ```` 
 mvn spring-boot:run
